@@ -1,6 +1,5 @@
 import React,{useState, useContext} from 'react';
 import {GlobalContext} from '../context/GlobalState';
-import uuid from 'uuid'
 
 const AddTransaction = () => {
     const {addTransaction} = useContext(GlobalContext);
@@ -12,7 +11,6 @@ const AddTransaction = () => {
 
         addTransaction(
             {
-                id: uuid.v4(),
                 text,
                 amount: parseInt(amount)
             }

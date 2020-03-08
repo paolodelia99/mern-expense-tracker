@@ -2,10 +2,20 @@ const express = require('express');
 const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
+const connectDb = require('./config/db');
 
 dotenv.config({path: './config/config.env'});
 
+connectDb();
+
 const app = express();
+
+//Body parsers middleware
+app.use(express.json());
+
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'))
+}
 
 //Routes
 app.use('/api/v1/transactions',require('./routes/transactions'));
