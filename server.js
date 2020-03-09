@@ -18,9 +18,9 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 //Routes
-app.use('/api/v1/transactions',require('./routes/transactions'));
 app.use('/api/v1/auth',require('./routes/auth'));
 app.use('/api/v1/user',require('./routes/user'));
+app.use('/api/v1/profile',require('./routes/profile'));
 
 const PORT = process.env.PORT || 5000;
 

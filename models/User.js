@@ -21,11 +21,6 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    transactions : {
-        type: Array,
-        required: true,
-        default: []
-    }
 });
 
 module.exports = mongoose.model('User',UserSchema);
