@@ -1,12 +1,16 @@
 import React,{createContext,useReducer} from "react";
-import AppReducer from './AppReducer';
+import ProfileReducer from './ProfileReducer';
 import axios from 'axios'
 
 //Initial state
 const initialState = {
+    token: localStorage.getItem('token'),
+    isAuthenticated: null,
+    loading: true,
+    user: null,
     transactions: [],
     error: null,
-    loading: true
+    transactionsLoading: true
 }
 
 //Create context
@@ -14,16 +18,16 @@ export const GlobalContext = createContext(initialState);
 
 //Provider component
 export const GlobalProvider = ({children}) => {
-    const [state,dispatch] = useReducer(AppReducer, initialState);
+    const [state,dispatch] = useReducer(ProfileReducer, initialState);
 
     //Actions
     //Get all the transactions
-    async function getTransactions() {
+    async function getProfile() {
         try{
-            const res = await axios.get('/api/v1/transactions');
+            const res = await axios.get('/api/v1/profile');
 
             dispatch({
-                type: 'GET_TRANSACTIONS',
+                type: 'GET_PROFILE',
                 payload: res.data.data
             })
         }catch (e) {
@@ -40,10 +44,10 @@ export const GlobalProvider = ({children}) => {
             headers : {
                 'Content-Type': 'application/json'
             }
-        }
+        };
 
         try {
-            const res = await axios.post('/api/v1/transactions', transaction, config);
+            const res = await axios.post('/api/v1/profile/transaction', transaction, config);
 
             dispatch({
                 type: 'ADD_TRANSACTION',
@@ -60,7 +64,7 @@ export const GlobalProvider = ({children}) => {
     //Delete a transaction
     async function deleteTransaction(id) {
         try{
-            await axios.delete(`/api/v1/transactions/${id}`);
+            await axios.delete(`/api/v1/profile/transaction/${id}`);
 
             dispatch({
                 type:'DELETE_TRANSACTION',
@@ -78,12 +82,15 @@ export const GlobalProvider = ({children}) => {
 
     return (<GlobalContext.Provider
         value={{
+            auth: state.isAuthenticated,
+            loading: state.loading,
+            user: state.user,
             transactions: state.transactions,
             error: state.error,
-            loading: state.loading,
+            transactionsLoading: state.transactionsLoading,
             deleteTransaction,
             addTransaction,
-            getTransactions
+            getProfile
         }}
     >
         {children}

@@ -1,24 +1,30 @@
-import React from 'react';
-import Header from "./components/Header";
-import Balance from "./components/Balance";
-import IncomeExpenses from "./components/incomeExpenses";
-import TransactionList from "./components/TransactionList";
-import AddTransaction from "./components/AddTransaction";
+import React, {Fragment} from 'react';
 import { GlobalProvider } from './context/GlobalState';
 import './App.css'
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import Routes from "./components/Routing/Routes";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.token) {
+    setAuthToken(localStorage.token);
+}
 
 function App() {
+    // useEffect(() => {
+    //     store.dispatch(loadUser());
+    // }, []);
+
   return (
       <GlobalProvider>
-          <div>
-              <Header/>
-              <div className="container">
-                  <Balance/>
-                  <IncomeExpenses/>
-                  <TransactionList/>
-                  <AddTransaction/>
-              </div>
-          </div>
+          <Router>
+              <Fragment>
+                  <Switch>
+                      <!--<Route exact path='/' component={LandingPage}/>-->
+                      <Route component={Routes}/>
+                      <Route/>
+                  </Switch>
+              </Fragment>
+          </Router>
       </GlobalProvider>
   );
 }

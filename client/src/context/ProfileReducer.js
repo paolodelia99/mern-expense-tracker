@@ -2,11 +2,12 @@ export default (state,action) => {
     const {type,payload} = action;
 
     switch (type) {
-        case 'GET_TRANSACTIONS':
+        case 'GET_PROFILE':
             return {
                 ...state,
-                loading: false,
-                transactions: payload
+                transactionsLoading: false,
+                user: payload.user,
+                transactions: payload.transactions
             };
         case 'ADD_TRANSACTION':
             return {
