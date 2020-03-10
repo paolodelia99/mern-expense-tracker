@@ -6,29 +6,43 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT,
-    CLEAR_PROFILE
+    CLEAR_PROFILE, GET_LOADED_USER
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
-import { createProfile } from "./profile";
+import {createProfile, getProfile} from "./profile";
 import axios from "axios";
 
 //Load User
-export const loadUser = (register) => async dispatch =>{
+export const loadUser = (register) => dispatch =>{
     if(localStorage.token){
-        setAuthToken(localStorage.token)
-    }
-
-    try{
-        const res = await axios.get('/api/v1/auth');
-
-        if(register)
-            dispatch(createProfile());
+        setAuthToken(localStorage.token);
 
         dispatch({
             type: USER_LOADED,
-            payload: res.data.user
         })
-    }catch (err) {
+    }else{
+        dispatch({
+            type: AUTH_ERROR
+        })
+    }
+};
+
+//Get loadedUser
+export const getLoadedUser = () => async dispatch => {
+    if(localStorage.token) {
+        setAuthToken(localStorage.token);
+    }
+
+    try {
+        const res = await axios.get('api/v1/auth');
+
+        dispatch({
+            type: GET_LOADED_USER,
+            payload: res.data
+        })
+    }catch (e) {
+        console.log(e)
+
         dispatch({
             type: AUTH_ERROR
         })
@@ -53,7 +67,8 @@ export const register = ({ firstName,lastName, email, password }) => async dispa
             payload: res.data
         });
 
-        dispatch(loadUser(true));
+        dispatch(loadUser());
+        dispatch(createProfile());
     } catch (err) {
         console.log(err)
         // const errors = err.response.data.errors;
@@ -86,7 +101,8 @@ export const login = (email, password) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(loadUser(false));
+        dispatch(loadUser());
+        dispatch(getProfile());
     } catch (err) {
         const errors = err.response.data.errors;
 

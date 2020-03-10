@@ -15,15 +15,6 @@ const DashBoard = ({auth: { user, loading}, profile:{transactionsLoading} , getP
     useEffect(()=> {
         getProfile();
     },[getProfile]);
-    const firstUpdate = useRef(true);
-
-    useLayoutEffect(() => {
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            return;
-        }
-
-    },[]);
 
     return loading && transactionsLoading ? (
         <Spinner/>

@@ -21,7 +21,10 @@ const ProfileSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    transactions : [TransactionSchema]
+    transactions : {
+        type: [TransactionSchema],
+        default: []
+    }
 });
 
 module.exports = mongoose.model('Profile',ProfileSchema);

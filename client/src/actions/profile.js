@@ -43,7 +43,7 @@ export const getProfile = () => async dispatch => {
     try{
         const res = await axios.get('/api/v1/profile');
 
-        console.log(res.data.data)
+        console.log(res.data.data);
 
         dispatch({
             type: GET_PROFILE,

@@ -5,7 +5,7 @@ import Login from "./components/Auth/Login";
 //Redux
 import { Provider } from 'react-redux';
 import setAuthToken from "./utils/setAuthToken";
-import {loadUser} from "./actions/auth";
+import {getLoadedUser} from "./actions/auth";
 import store from "./store";
 //Css
 import './App.css';
@@ -14,7 +14,7 @@ const App = () => {
     useEffect(() => {
         if (localStorage.token) {
             setAuthToken(localStorage.token);
-            store.dispatch(loadUser());
+            store.dispatch(getLoadedUser());
         }
     }, []);
 

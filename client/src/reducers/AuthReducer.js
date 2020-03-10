@@ -5,7 +5,7 @@ import {
     LOGOUT,
     REGISTER_FAIL,
     AUTH_ERROR,
-    LOGIN_FAIL,
+    LOGIN_FAIL, GET_LOADED_USER,
 } from '../actions/types';
 
 const initialState = {
@@ -23,8 +23,7 @@ export default function (state = initialState,action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
-                user: payload
+                loading: false
             };
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
@@ -33,7 +32,16 @@ export default function (state = initialState,action) {
                 ...state,
                 ...payload,
                 isAuthenticated: true,
+                user: payload.user,
                 loading: false
+            };
+        case GET_LOADED_USER:
+            return {
+                ...state,
+                ...state,
+                isAuthenticated: true,
+                loading: false,
+                user: payload.user
             };
         case REGISTER_FAIL:
         case AUTH_ERROR:
