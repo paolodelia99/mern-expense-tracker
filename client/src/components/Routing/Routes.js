@@ -13,7 +13,6 @@ const Routes = () => {
             <Alert/>
             <Switch>
                 <Route exact path='/register' component={Register} />
-                <Route exact path='/' component={Login} />
                 <PrivateRoute exact path='/dashboard' component={DashBoard} />
                 <Route component={NotFound} />
             </Switch>

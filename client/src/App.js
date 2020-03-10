@@ -1,6 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import Routes from "./components/Routing/Routes";
+import Login from "./components/Auth/Login";
 //Redux
 import { Provider } from 'react-redux';
 import setAuthToken from "./utils/setAuthToken";
@@ -23,6 +24,7 @@ const App = () => {
             <Router>
                 <Fragment>
                     <Switch>
+                        <Route exact path='/' component={Login}/>
                         <Route component={Routes} />
                     </Switch>
                 </Fragment>
