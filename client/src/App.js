@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Routes from "./components/Routing/Routes";
 import Login from "./components/Auth/Login";
 //Redux
@@ -10,13 +10,12 @@ import store from "./store";
 //Css
 import './App.css';
 
-if (localStorage.token) {
-    setAuthToken(localStorage.token);
-}
-
 const App = () => {
     useEffect(() => {
-        store.dispatch(loadUser());
+        if (localStorage.token) {
+            setAuthToken(localStorage.token);
+            store.dispatch(loadUser());
+        }
     }, []);
 
     return (
