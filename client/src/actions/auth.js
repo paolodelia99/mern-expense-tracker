@@ -9,7 +9,7 @@ import {
     CLEAR_PROFILE, GET_LOADED_USER
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
-import {createProfile, getProfile} from "./profile";
+import { createProfile, getProfile } from "./profile";
 import axios from "axios";
 
 //Load User

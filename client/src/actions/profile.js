@@ -52,7 +52,7 @@ export const getProfile = () => async dispatch => {
     }catch (e) {
         dispatch({
             type: TRANSACTION_ERROR,
-            payload: e.response.data.error
+            payload: e
         })
     }
 };
