@@ -1,5 +1,4 @@
-import React,{useContext} from 'react';
-import {GlobalContext} from '../context/GlobalState';
+import React from 'react';
 import { numberWithCommas } from "../utils/format";
 //Redux
 import PropTypes from 'prop-types';
