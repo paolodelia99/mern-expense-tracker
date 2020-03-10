@@ -1,4 +1,4 @@
-export default function (state=initialState,action) {
+export default function (state,action) {
     const { type, payload } = action;
 
     switch (type) {
@@ -27,6 +27,7 @@ export default function (state=initialState,action) {
                 ...state,
                 token: null,
                 isAuthenticated: false,
+                user: null,
                 loading: false
             };
         default:

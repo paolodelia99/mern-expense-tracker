@@ -5,8 +5,7 @@ import Login from "../Auth/Login";
 import Alert from "../Layout/Alert";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../Layout/NotFound";
-import Dashboard from "../Dashboard";
-
+import DashBoard from "../DashBoard";
 const Routes = () => {
     return (
         <section className='container'>
@@ -14,7 +13,7 @@ const Routes = () => {
             <Switch>
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/' component={Login} />
-                <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                <PrivateRoute exact path='/dashboard' component={DashBoard} />
                 <Route component={NotFound} />
             </Switch>
         </section>

@@ -6,7 +6,7 @@ export default (state,action) => {
             return {
                 ...state,
                 transactionsLoading: false,
-                user: payload.user,
+                //user: payload.user,
                 transactions: payload.transactions
             };
         case 'ADD_TRANSACTION':

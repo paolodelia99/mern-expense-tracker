@@ -1,21 +1,9 @@
-import React,{useContext, useRef, useLayoutEffect} from 'react';
+import React,{useContext } from 'react';
 import {GlobalContext} from '../context/GlobalState';
 import Transaction from './Transaction'
 
 const TransactionList = () => {
-    const { transactions, getTransactions } = useContext(GlobalContext);
-    const firstUpdate = useRef(true);
-
-    useLayoutEffect(() => {
-        if (firstUpdate.current) {
-            firstUpdate.current = false;
-            getTransactions();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-            return;
-        }
-
-    },[]);
-
+    const { transactions } = useContext(GlobalContext);
     return (
         <>
             <h3>History</h3>

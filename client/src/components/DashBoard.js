@@ -1,12 +1,21 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext,useEffect} from 'react';
 import Header from "./Header";
 import Balance from "./Balance";
 import IncomeExpenses from "./incomeExpenses";
 import TransactionList from "./TransactionList";
 import AddTransaction from "./AddTransaction";
+import {GlobalContext} from "../context/GlobalState";
+import Spinner from "./Layout/Spinner";
 
 const DashBoard = () => {
-    return (
+    const {getProfile, user, loading} = useContext(GlobalContext);
+    useEffect(()=> {
+        getProfile();
+    },[getProfile]);
+
+    return loading && user === null ? (
+        <Spinner/>
+    ) : (
         <Fragment>
             <div>
                 <Header/>

@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import { GlobalProvider } from './context/GlobalState';
-import './App.css'
+import './App.css';
+import './style.css'
 import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import Routes from "./components/Routing/Routes";
 import setAuthToken from "./utils/setAuthToken";
@@ -19,7 +20,6 @@ function App() {
           <Router>
               <Fragment>
                   <Switch>
-                      <!--<Route exact path='/' component={LandingPage}/>-->
                       <Route component={Routes}/>
                       <Route/>
                   </Switch>

@@ -1,10 +1,27 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { check, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
+
+// @route    GET api/v1/auth
+// @desc     Test route
+// @access   Private
+exports.getUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+
+        res.status(200).json({
+            success: true,
+            user
+        });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+};
 
 //@desc     Authenticate user & get token
-//@route    GET /api/v1/auth
+//@route    POST /api/v1/auth
 //@access   Public
 exports.authUser = async (req,res,next) => {
     const errors = validationResult(req);
@@ -15,7 +32,7 @@ exports.authUser = async (req,res,next) => {
     const { email, password } = req.body;
 
     try {
-        let user = await User.findOne({ email }).populate('transactions');
+        let user = await User.findOne({ email }).select('-password');
 
         if (!user) {
             return res
