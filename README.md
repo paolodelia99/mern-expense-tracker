@@ -1,2 +1,2 @@
-# MERN exspense tracker
+# MERN expense tracker
 

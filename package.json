@@ -4,7 +4,7 @@
   "description": "A mern based expense tracker",
   "main": "server.js",
   "scripts": {
-    "start": "ndoe server",
+    "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "client-install": "npm install --prefix client",
