@@ -6,6 +6,7 @@ import Alert from "../Layout/Alert";
 import PrivateRoute from "./PrivateRoute";
 import NotFound from "../Layout/NotFound";
 import DashBoard from "../DashBoard";
+
 const Routes = () => {
     return (
         <section>

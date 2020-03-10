@@ -1,4 +1,4 @@
-import React, {Fragment,useEffect} from 'react';
+import React, {Fragment, useEffect, useLayoutEffect, useRef} from 'react';
 import Header from "./Header";
 import Balance from "./Balance";
 import IncomeExpenses from "./incomeExpenses";
@@ -15,6 +15,15 @@ const DashBoard = ({auth: { user, loading}, profile:{transactionsLoading} , getP
     useEffect(()=> {
         getProfile();
     },[getProfile]);
+    const firstUpdate = useRef(true);
+
+    useLayoutEffect(() => {
+        if (firstUpdate.current) {
+            firstUpdate.current = false;
+            return;
+        }
+
+    },[]);
 
     return loading && transactionsLoading ? (
         <Spinner/>
@@ -22,7 +31,7 @@ const DashBoard = ({auth: { user, loading}, profile:{transactionsLoading} , getP
         <div>
             <NavBar/>
             <div className="container">
-                <Header user={user}/>
+                <Header/>
                 <Balance/>
                 <IncomeExpenses/>
                 <TransactionList/>

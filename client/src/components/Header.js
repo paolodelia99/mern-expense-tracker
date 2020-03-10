@@ -1,17 +1,22 @@
 import React from 'react';
 //Redux
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const Header = ({user}) => {
+const Header = ({auth:{user,loading}}) => {
     return (
         <h2 className='text-center'>
-            Hello, {user.firstName} {user.lastName} !
+            Hello, {!loading && user ? user.firstName : null} {!loading && user ? user.lastName : null} !
         </h2>
     );
 };
 
 Header.propTypes = {
-    user: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+
+export default connect(mapStateToProps)(Header);
