@@ -1,10 +1,11 @@
-import React,{useContext} from 'react';
-import {GlobalContext} from '../context/GlobalState';
+import React from 'react';
 import { numberWithCommas } from "../utils/format";
+//Redux
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
-const IncomeExpenses = () => {
-    const { transactions } = useContext(GlobalContext);
+const IncomeExpenses = ({profile:{transactions}}) => {
     const amounts = transactions.map(transaction => transaction.amount);
     //Calculate the income from the amouts
     const income = amounts
@@ -31,4 +32,12 @@ const IncomeExpenses = () => {
     );
 };
 
-export default IncomeExpenses;
+IncomeExpenses.propTypes = {
+    profile: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    profile: state.profile
+})
+
+export default connect(mapStateToProps)(IncomeExpenses);

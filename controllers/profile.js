@@ -48,6 +48,9 @@ exports.createProfile = async (req,res,next) => {
             { user: req.user.id },
             { $set: profileFields },
             { new: true, upsert: true }
+        ).populate(
+            'user',
+            ['firstName', 'lastName']
         );
 
         res.status(200).json({

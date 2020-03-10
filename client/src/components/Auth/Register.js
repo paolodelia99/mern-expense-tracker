@@ -1,9 +1,12 @@
-import React, { Fragment, useState,useContext } from 'react';
+import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
-import {GlobalContext} from "../../context/GlobalState";
+//import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+import PropTypes from 'prop-types';
+import './style.css';
 
-const Register = () => {
-    const {register, isAuthenticated} = useContext(GlobalContext);
+const Register = ({ setAlert, register, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -20,9 +23,8 @@ const Register = () => {
     const onSubmit = async e => {
         e.preventDefault();
         if (password !== password2) {
-            //stub
-            alert("Passwords do not match")
-            //setAlert('Passwords do not match', 'danger');
+            alert('Passwords do not match') //Stub
+            // setAlert('Passwords do not match', 'danger');
         } else {
             register({ firstName,lastName, email, password });
         }
@@ -33,7 +35,7 @@ const Register = () => {
     }
 
     return (
-        <Fragment>
+        <div className="container">
             <h1 className='large text-primary'>Sign Up</h1>
             <p className='lead'>
                 <i className='fas fa-user' /> Create Your Account
@@ -86,8 +88,23 @@ const Register = () => {
                 </div>
                 <input type='submit' className='btn btn-primary' value='Register' />
             </form>
-            <p className='my-1'> Already have an account? <Link to='/'>Sign In</Link></p>
-    </Fragment>);
+            <p className='my-1'>
+                Already have an account? <Link to='/'>Log In</Link>
+            </p>
+        </div>
+    );
 };
 
-export default Register;
+Register.propTypes = {
+    register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool
+};
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+    mapStateToProps,
+    { register }
+)(Register);

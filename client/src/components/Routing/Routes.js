@@ -8,7 +8,7 @@ import NotFound from "../Layout/NotFound";
 import DashBoard from "../DashBoard";
 const Routes = () => {
     return (
-        <section className='container'>
+        <section>
             <Alert/>
             <Switch>
                 <Route exact path='/register' component={Register} />
