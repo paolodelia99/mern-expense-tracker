@@ -12,9 +12,6 @@ import { getProfile } from '../actions/profile';
 import NavBar from "./Layout/NavBar";
 
 const DashBoard = ({auth: { user, loading}, profile:{transactionsLoading} , getProfile}) => {
-    useEffect(()=> {
-        getProfile();
-    },[getProfile]);
 
     return loading && transactionsLoading ? (
         <Spinner/>

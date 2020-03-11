@@ -11,15 +11,19 @@ import {
 import setAuthToken from '../utils/setAuthToken';
 import { createProfile, getProfile } from "./profile";
 import axios from "axios";
+import {setAlert} from "./alert";
 
 //Load User
 export const loadUser = (register) => dispatch =>{
     if(localStorage.token){
+        console.log(localStorage.token)
         setAuthToken(localStorage.token);
 
         dispatch({
             type: USER_LOADED,
         })
+        if (!register)
+            dispatch(getProfile())
     }else{
         dispatch({
             type: AUTH_ERROR
@@ -40,6 +44,7 @@ export const getLoadedUser = () => async dispatch => {
             type: GET_LOADED_USER,
             payload: res.data
         })
+        dispatch(getProfile())
     }catch (e) {
         console.log(e)
 
@@ -67,15 +72,16 @@ export const register = ({ firstName,lastName, email, password }) => async dispa
             payload: res.data
         });
 
-        dispatch(loadUser());
+        dispatch(loadUser(true));
         dispatch(createProfile());
     } catch (err) {
         console.log(err)
-        // const errors = err.response.data.errors;
-        //
-        // if (errors) {
-        //     //errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-        // }
+        if(err !== {}){
+            const errors = err.response.data.errors;
+
+            if (errors)
+                 errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+        }
 
         dispatch({
             type: REGISTER_FAIL
@@ -101,13 +107,13 @@ export const login = (email, password) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(loadUser());
-        dispatch(getProfile());
+        dispatch(loadUser(false));
+        // dispatch(getProfile());
     } catch (err) {
         const errors = err.response.data.errors;
 
         if (errors) {
-            //errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
 
         dispatch({

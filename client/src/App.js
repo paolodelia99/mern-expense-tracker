@@ -2,6 +2,7 @@ import React, {Fragment, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Routes from "./components/Routing/Routes";
 import Login from "./components/Auth/Login";
+import Alert from "./components/Layout/Alert";
 //Redux
 import { Provider } from 'react-redux';
 import setAuthToken from "./utils/setAuthToken";
