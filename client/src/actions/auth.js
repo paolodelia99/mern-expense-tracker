@@ -16,7 +16,6 @@ import {setAlert} from "./alert";
 //Load User
 export const loadUser = (register) => dispatch =>{
     if(localStorage.token){
-        console.log(localStorage.token)
         setAuthToken(localStorage.token);
 
         dispatch({

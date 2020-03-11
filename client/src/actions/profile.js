@@ -43,6 +43,7 @@ export const createProfile = (edit = false) => async dispatch =>{
 export const getProfile = () => async dispatch => {
     try{
         const res = await axios.get('/api/v1/profile');
+        console.log(res)
 
         console.log(res.data.data);
 
