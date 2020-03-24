@@ -22,7 +22,7 @@ const IncomeExpenses = ({profile:{transactions}}) => {
         <div className="inc-exp-container">
             <div>
                 <h4>Income</h4>
-                <p  className="money plus">+${numberWithCommas(income)}</p>
+                <p  className="money plus">+€{numberWithCommas(income)}</p>
             </div>
             <div>
                 <h4>Expense</h4>
@@ -34,10 +34,10 @@ const IncomeExpenses = ({profile:{transactions}}) => {
 
 IncomeExpenses.propTypes = {
     profile: PropTypes.object.isRequired
-}
+};
 
 const mapStateToProps = state => ({
     profile: state.profile
-})
+});
 
 export default connect(mapStateToProps)(IncomeExpenses);

@@ -11,7 +11,7 @@ const Transaction = ({transaction,deleteTransaction}) => {
 
     return (
         <li className={rightClass}>
-            {transaction.text} <span>{sign}${numberWithCommas(Math.abs(transaction.amount))}</span>
+            {transaction.text} <span>{sign}€{numberWithCommas(Math.abs(transaction.amount))}</span>
             <button
                 className="delete-btn"
                 onClick={() => deleteTransaction(transaction._id)}
