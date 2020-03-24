@@ -26,7 +26,7 @@ const IncomeExpenses = ({profile:{transactions}}) => {
             </div>
             <div>
                 <h4>Expense</h4>
-                <p className="money minus">-${numberWithCommas(expense)}</p>
+                <p className="money minus">-€{numberWithCommas(expense)}</p>
             </div>
         </div>
     );
