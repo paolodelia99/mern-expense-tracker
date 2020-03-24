@@ -16,4 +16,15 @@ const TransactionSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Transaction', TransactionSchema)
+const ProfileSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    transactions : {
+        type: [TransactionSchema],
+        default: []
+    }
+});
+
+module.exports = mongoose.model('Profile',ProfileSchema);

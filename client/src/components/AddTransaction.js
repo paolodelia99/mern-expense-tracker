@@ -1,8 +1,10 @@
-import React,{useState, useContext} from 'react';
-import {GlobalContext} from '../context/GlobalState';
+import React,{useState} from 'react';
+//Redux
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {addTransaction} from "../actions/profile";
 
-const AddTransaction = () => {
-    const {addTransaction} = useContext(GlobalContext);
+const AddTransaction = ({addTransaction}) => {
     const [text,setText] = useState('');
     const [amount,setAmount] = useState(0);
 
@@ -48,4 +50,8 @@ const AddTransaction = () => {
     );
 };
 
-export default AddTransaction;
+AddTransaction.propTypes = {
+    addTransaction: PropTypes.func.isRequired
+};
+
+export default connect(null,{addTransaction})(AddTransaction);
